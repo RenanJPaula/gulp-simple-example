@@ -1,0 +1,26 @@
+{
+  "name": "gulp-simple-example",
+  "version": "1.0.0",
+  "description": "Simple example of build with Gulp",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "simple",
+    "example",
+    "gulp",
+    "front-end build"
+  ],
+  "author": "Renan Johannsen de Paula",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-uglify": "^1.5.1",
+    "gulp-useref": "^3.0.3",
+    "gulp-util": "^3.0.7"
+  },
+  "dependencies": {}
+}
