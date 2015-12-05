@@ -14,7 +14,7 @@ To execute all tasks:
 $ gulp
 ```
 
-To execute a single task as 'html', 'js' or 'css' tasks:
+To execute a single task as 'html', 'js', 'css' or 'watch' tasks:
 ```
 $ gulp {task name}
 ```
