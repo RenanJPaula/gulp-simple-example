@@ -1,55 +1,51 @@
-var gulp = require('gulp')
-  , gutil = require('gulp-util')
-  , concat = require('gulp-concat')
-  , minifycss = require('gulp-minify-css')
-  , uglify = require('gulp-uglify')
-  , useref = require('gulp-useref');
+const gulp = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
+const autoprefixer = require('gulp-autoprefixer');
+const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
+const csso = require('gulp-csso');
+const babel = require('gulp-babel');
+const rename = require('gulp-rename');
+const uglify = require('gulp-uglify');
+const { series, parallel, watch } = require('gulp');
 
-var html = {
-  source: 'src',
-  target: 'dist'
+function css(cb) {
+  gulp
+      .src('styles/**/*.scss')
+      .pipe(sass())
+      .pipe(sourcemaps.init())
+      .pipe(autoprefixer())
+      .pipe(csso())
+      .pipe(
+          rename({
+            extname: '.min.css'
+          })
+      )
+      .pipe(sourcemaps.write('.'))
+      .pipe(gulp.dest('dist/'));
+  cb();
 }
 
-var css = {
-  source: 'src/css',
-  target: 'dist/css'
-};
-
-var js = {
-  source: 'src/js',
-  target: 'dist/js'
-};
-
-gulp.task('html', function() {
-  gulp.src([
-    html.source + '/*.html'
-  ])
-  .pipe(useref({noAssets: true}))
-  .pipe(gulp.dest(html.target));
-});
-
-gulp.task('css', function() {
-  gulp.src([
-    css.source + '/*.css'
-  ])
-  .pipe(minifycss())
-  .pipe(concat('all.min.css'))
-  .pipe(gulp.dest(css.target));
-});
-
-gulp.task('js', function() {
-  gulp.src([
-    js.source + '/*.js'
-  ])
-  .pipe(uglify({mangle:true}).on('error', gutil.log))
-  .pipe(concat('all.min.js'))
-  .pipe(gulp.dest(js.target));
-});
-
-gulp.task('default', ['html', 'css', 'js']);
-
-gulp.task('watch', function() {
-  gulp.watch(html.source + '/*.html', ['html']);
-  gulp.watch(css.source + '/*.css', ['css']);
-  gulp.watch(js.source + '/*.js', ['js']);
-});
+function js(cb) {
+  gulp
+      .src('scripts/**/*.js')
+      .pipe(
+          babel({
+            presets: ['@babel/env']
+          })
+      )
+      .pipe(uglify())
+      .pipe(
+          rename({
+            extname: '.min.js'
+          })
+      )
+      .pipe(gulp.dest('dist/'));
+  cb();
+}
+function watchFiles() {
+  gulp.watch('styles/**/*.scss', css);
+  gulp.watch('scripts/**/*.js', js);
+}
+exports.default = parallel(css, js);
+exports.watch = parallel(watchFiles);

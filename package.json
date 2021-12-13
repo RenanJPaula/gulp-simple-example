@@ -1,26 +1,24 @@
 {
-  "name": "gulp-simple-example",
-  "version": "1.0.0",
-  "description": "Simple example of build with Gulp",
-  "main": "app.js",
+  "name": "gulp4_sass",
+  "description": "Gulp 4 Sass Kickstart Example",
+  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "./node_modules/.bin/gulp",
+    "watch": "./node_modules/.bin/gulp watch"
   },
-  "keywords": [
-    "simple",
-    "example",
-    "gulp",
-    "front-end build"
-  ],
-  "author": "Renan Johannsen de Paula",
-  "license": "ISC",
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-minify-css": "^1.2.2",
-    "gulp-uglify": "^1.5.1",
-    "gulp-useref": "^3.0.3",
-    "gulp-util": "^3.0.7"
-  },
-  "dependencies": {}
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "autoprefixer": "^10.4.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^4.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.45.0"
+  }
 }
